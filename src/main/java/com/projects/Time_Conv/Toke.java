@@ -42,12 +42,16 @@ public class Toke {
         // HttpResponse.BodyHandlers.ofString());
         // System.out.println(httpResponse.body());
 
-        SparkSession spark = SparkSession.builder().appName("Java Spark SQL Example").getOrCreate();
+        SparkSession spark = SparkSession.builder().appName("time_zone_conv").config("spark.master", "local")
+                .getOrCreate();
 
         StructType schema = new StructType().add("Abr", "string").add("Zone", "string").add("Dilate", "string");
 
         Dataset<Row> df = spark.read().option("mode", "DROPMALFORMED").schema(schema)
                 .csv("/home/jmarc/Desktop/Time_Conv/src/main/java/com/projects/Time_Conv/timezones.csv");
+        df.createOrReplaceTempView("time_zone");
+        Dataset<Row> sqlResult = spark.sql("SELECT Abr,Zone,Dilate" + " FROM time_zone");
 
+        sqlResult.show(); // for testing
     }
 }
