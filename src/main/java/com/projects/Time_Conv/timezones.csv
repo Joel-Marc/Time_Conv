@@ -1,4 +1,3 @@
-Abr,Zone,Dilate
 ACDT,Australian Central Daylight Savings Time,+10:30
 ACST,Australian Central Standard Time,+09:30
 ACT,Acre Time,-05
@@ -181,7 +180,6 @@ TVT,Tuvalu Time,+12
 ULAST,Ulaanbaatar Summer Time,+09
 ULAT,Ulaanbaatar Standard Time,+08
 USZ1,Kaliningrad Time,+02
-,Coordinated Universal Time,±00
 UYST,Uruguay Summer Time,-02
 UYT,Uruguay Standard Time,-03
 UZT,Uzbekistan Time,+05
