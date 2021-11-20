@@ -17,7 +17,7 @@ public class controller {
 	public ModelAndView save(@ModelAttribute search Search) {
 		System.out.println(Search);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("Search_info");
+		modelAndView.setViewName("Search_value");
 		modelAndView.addObject("search",Search);
 		return modelAndView;
 	}
