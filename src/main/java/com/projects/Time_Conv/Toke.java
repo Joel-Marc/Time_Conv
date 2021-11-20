@@ -1,18 +1,16 @@
 package com.projects.Time_Conv;
 
-import edu.stanford.nlp.ling.*;
-import edu.stanford.nlp.pipeline.*;
-
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.*;
+import java.util.Properties;
+import org.apache.spark.sql.SparkSession;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.pipeline.CoreDocument;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 public class Toke {
     // public static String text = "Marie was born in Paris.";
-    private static String url = "https://gist.githubusercontent.com/valo/c07f8db33d223f57a4cc9c670e1b6050/raw/2f47e8d567aafcaab9ed9cf1b90e21db09a57532/timezones.csv";
+    // private static String url =
+    // "https://gist.githubusercontent.com/valo/c07f8db33d223f57a4cc9c670e1b6050/raw/2f47e8d567aafcaab9ed9cf1b90e21db09a57532/timezones.csv";
 
     public static void testToke(String text) throws IOException, InterruptedException {
         // set up pipeline properties
@@ -34,9 +32,11 @@ public class Toke {
                     tok.word(), tok.tag()));
         }
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(httpResponse.body());
+        // HttpClient client = HttpClient.newHttpClient();
+        // HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+        // HttpResponse<String> httpResponse = client.send(request,
+        // HttpResponse.BodyHandlers.ofString());
+        // System.out.println(httpResponse.body());
+
     }
 }
