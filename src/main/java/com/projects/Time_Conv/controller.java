@@ -18,6 +18,10 @@ public class controller
 	public ModelAndView save(@ModelAttribute search Search)
 	{
 		System.out.println(Search);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("Search_info");
+		modelAndView.addObject("search",Search);
+		return modelAndView;
 	}
 	
 
