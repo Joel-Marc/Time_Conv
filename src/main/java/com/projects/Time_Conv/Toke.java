@@ -1,11 +1,12 @@
 package com.projects.Time_Conv;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-import com.mongodb.MongoClient;
-
 import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.StructType;
@@ -32,18 +33,41 @@ public class Toke {
         CoreDocument doc = new CoreDocument(text);
         // annotate
         pipeline.annotate(doc);
+        List<String> hmm = new ArrayList<String>();
+        String tim = new String("00:00");
         // display tokens
         for (CoreLabel tok : doc.tokens()) {
             System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
                     tok.word(), tok.tag()));
+            if (tok.tag().contains("NNP")) {
+                hmm.add(tok.word());
+            }
+            if (tok.tag().contains("CD")) {
+                tim = tok.word();
+            }
         }
-
+        System.out.println(hmm);
         // HttpClient client = HttpClient.newHttpClient();
         // HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
         // HttpResponse<String> httpResponse = client.send(request,
         // HttpResponse.BodyHandlers.ofString());
         // System.out.println(httpResponse.body());
+        tim = tim.replace(":", "");
+        while (tim.length() <= 4) {
+            tim = tim + "0";
+        }
+        int time = Integer.parseInt(tim);
+        int start = extracted(hmm.get(0));
+        int end = extracted(hmm.get(1));
+        System.out.println(start + " : " + end + " : " + (end - start) + " : " + time);
 
+        if (time + (end - start) < 0) {
+            System.out.println(time + (end - start) + 2400);
+        }
+
+    }
+
+    private static int extracted(String test) {
         SparkSession spark = SparkSession.builder().appName("time_zone_conv").config("spark.master", "local")
                 .getOrCreate();
 
@@ -52,10 +76,43 @@ public class Toke {
         Dataset<Row> df = spark.read().option("mode", "DROPMALFORMED").schema(schema)
                 .csv("/home/jmarc/Desktop/Time_Conv/src/main/java/com/projects/Time_Conv/timezones.csv");
         df.createOrReplaceTempView("time_zone");
-        Dataset<Row> sqlResult = spark.sql("SELECT Abr,Zone,Dilate" + " FROM time_zone");
+        // String test = new String("AMST");
+        Dataset<Row> sqlResult = spark.sql("SELECT Dilate" + " FROM time_zone where Abr = '" + test + "' LIMIT 1");
 
         sqlResult.show(); // for testing
+        List<String> listOne = sqlResult.as(Encoders.STRING()).collectAsList();
+        System.out.println(listOne);
+        System.out.println(sqlResult);
 
-        // MongoClient mongoClient = new MongoClient("localhost", 27017);
+        String st = new String(listOne.get(0));
+        int start = new Integer(0);
+        if (st.contains("+")) {
+
+            st = st.replace("+", "");
+            st = st.replace(":", "");
+            if (st.startsWith("0")) {
+                st = "0" + st;
+            }
+            while (st.length() <= 4) {
+                st = st + "0";
+            }
+            System.out.println(st);
+            start = Integer.parseInt(st);
+            System.out.println(start);
+        } else if (st.contains("-")) {
+
+            st = st.replace("-", "");
+            st = st.replace(":", "");
+            if (!st.startsWith("0")) {
+                st = "0" + st;
+            }
+            while (st.length() <= 4) {
+                st = st + "0";
+            }
+            System.out.println(st);
+            start = -Integer.parseInt(st);
+            System.out.println(start);
+        }
+        return start;
     }
 }
