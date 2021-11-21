@@ -44,11 +44,20 @@ public class Toke {
         pipeline.annotate(doc);
         List<String> hmm = new ArrayList<String>();
         String tim = new String("00:00");
+        int flag = 0;
         // display tokens
         for (CoreLabel tok : doc.tokens()) {
             System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
                     tok.word(), tok.tag()));
             if (tok.tag().contains("NNP") || tok.tag().contains("NN")) {
+                if ("am".contains(tok.word().toLowerCase()) || "pm".contains(tok.word().toLowerCase())) {
+                    if ("am".contains(tok.word().toLowerCase())) {
+                        flag = 1;
+                    } else {
+                        flag = 2;
+                    }
+                    continue;
+                }
                 hmm.add(tok.word());
             }
             if (tok.tag().contains("CD")) {
@@ -59,14 +68,22 @@ public class Toke {
         LocalDateTime today;
         if (!tim.contains("00:00")) {
             tim = tim.replace(":", "");
-            if (!tim.startsWith("0")) {
+            if (!tim.startsWith("0") && tim.length() == 1) {
                 tim = "0" + tim;
             }
             System.out.println(tim);
             while (tim.length() < 4) {
                 tim = tim + "0";
             }
+            System.out.println(tim);
+
             int time = Integer.parseInt(tim);
+            if (flag == 2) {
+                time += 1200;
+            }
+            if (time == 2400) {
+                time = 0000;
+            }
             today = LocalDateTime.of(LocalDate.now(), LocalTime.of((int) time / 100, time % 100, 00));
         } else {
             today = LocalDateTime.now();
@@ -79,9 +96,6 @@ public class Toke {
         // System.out.println(httpResponse.body());
         ZoneId fromTimeZone = ZoneId.of(extracted(hmm.get(0))); // Source timezone
         ZoneId toTimeZone = ZoneId.of(extracted(hmm.get(1))); // Target timezone
-        // System.out.println(ZoneId.getAvailableZoneIds() + " " +
-        // TimeZone.getTimeZone("PST"));
-        // LocalDateTime today = LocalDateTime.now(); // Current time
 
         // Zoned date time at source timezone
         ZonedDateTime currentISTime = today.atZone(fromTimeZone);
