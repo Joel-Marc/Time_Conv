@@ -1,7 +1,7 @@
 package com.projects.Time_Conv;
 
 public class search {
-	
+
 	private String search;
 
 	public String getSearch() {
@@ -16,7 +16,5 @@ public class search {
 	public String toString() {
 		return "search [search=" + search + "]";
 	}
-	
-	
 
 }

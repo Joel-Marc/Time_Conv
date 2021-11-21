@@ -59,12 +59,26 @@ public class Toke {
         int time = Integer.parseInt(tim);
         int start = extracted(hmm.get(0));
         int end = extracted(hmm.get(1));
-        System.out.println(start + " : " + end + " : " + (end - start) + " : " + time);
+        System.out.println(start + " : " + end + " : " + (adsub(start, end)) + " : " + time);
 
         if (time + (end - start) < 0) {
-            System.out.println(time + (end - start) + 2400);
+            System.out.println(adsub(time, adsub(start, end)));
         }
 
+    }
+
+    private static int adsub(int start, int end) {
+        int x = 0, y = 0, z = 0, t = 0;
+        y = (((int) start / 100) - ((int) end / 100));
+        x = start % 100 - end % 100;
+        y += (int) x / 60;
+        t = (int) y / 24;
+        y = y % 24;
+        x = x % 60;
+        z = t * 10000 + y * 100 + x;
+        System.out.println(x + " " + y + " " + z);
+
+        return z;
     }
 
     private static int extracted(String test) {

@@ -13,12 +13,12 @@ public class controller {
 		return "index";
 	}
 
-	@RequestMapping(value = "/Savesearch", method = RequestMethod.POST)
+	@RequestMapping(value = "Savesearch", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute search Search) {
 		System.out.println(Search);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("Search_value");
-		modelAndView.addObject("search",Search);
+		modelAndView.setViewName("Savesearch");
+		modelAndView.addObject("search", Search);
 		return modelAndView;
 	}
 
