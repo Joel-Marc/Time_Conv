@@ -14,7 +14,14 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Toke {
+    private static final String DATE_FORMAT = "dd-M-yyyy hh:mm:ss a z";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
     // public static String text = "Marie was born in Paris.";
     // private static String url =
     // "https://gist.githubusercontent.com/valo/c07f8db33d223f57a4cc9c670e1b6050/raw/2f47e8d567aafcaab9ed9cf1b90e21db09a57532/timezones.csv";
@@ -52,36 +59,27 @@ public class Toke {
         // HttpResponse<String> httpResponse = client.send(request,
         // HttpResponse.BodyHandlers.ofString());
         // System.out.println(httpResponse.body());
-        tim = tim.replace(":", "");
-        while (tim.length() <= 4) {
-            tim = tim + "0";
-        }
-        int time = Integer.parseInt(tim);
-        int start = extracted(hmm.get(0));
-        int end = extracted(hmm.get(1));
-        System.out.println(start + " : " + end + " : " + (adsub(start, end)) + " : " + time);
+        ZoneId fromTimeZone = ZoneId.of(extracted(hmm.get(0))); // Source timezone
+        ZoneId toTimeZone = ZoneId.of(extracted(hmm.get(1))); // Target timezone
+        // System.out.println(ZoneId.getAvailableZoneIds() + " " +
+        // TimeZone.getTimeZone("PST"));
+        LocalDateTime today = LocalDateTime.now(); // Current time
 
-        if (time + (end - start) < 0) {
-            System.out.println(adsub(time, adsub(start, end)));
-        }
-        return Integer.toString(time);
+        // Zoned date time at source timezone
+        ZonedDateTime currentISTime = today.atZone(fromTimeZone);
+
+        // Zoned date time at target timezone
+        ZonedDateTime currentETime = currentISTime.withZoneSameInstant(toTimeZone);
+
+        // Format date time - optional
+        System.out.println(formatter.format(currentISTime));
+        System.out.println(formatter.format(currentETime));
+
+        return "\nCurrent Time : " + formatter.format(currentISTime) + "\nDilated Time : "
+                + formatter.format(currentETime);
     }
 
-    private static int adsub(int start, int end) {
-        int x = 0, y = 0, z = 0, t = 0;
-        y = (((int) start / 100) - ((int) end / 100));
-        x = start % 100 - end % 100;
-        y += (int) x / 60;
-        t = (int) y / 24;
-        y = y % 24;
-        x = x % 60;
-        z = t * 10000 + y * 100 + x;
-        System.out.println(x + " " + y + " " + z);
-
-        return z;
-    }
-
-    private static int extracted(String test) {
+    private static String extracted(String test) {
         SparkSession spark = SparkSession.builder().appName("time_zone_conv").config("spark.master", "local")
                 .getOrCreate();
 
@@ -99,34 +97,7 @@ public class Toke {
         System.out.println(sqlResult);
 
         String st = new String(listOne.get(0));
-        int start = new Integer(0);
-        if (st.contains("+")) {
 
-            st = st.replace("+", "");
-            st = st.replace(":", "");
-            if (st.startsWith("0")) {
-                st = "0" + st;
-            }
-            while (st.length() <= 4) {
-                st = st + "0";
-            }
-            System.out.println(st);
-            start = Integer.parseInt(st);
-            System.out.println(start);
-        } else if (st.contains("-")) {
-
-            st = st.replace("-", "");
-            st = st.replace(":", "");
-            if (!st.startsWith("0")) {
-                st = "0" + st;
-            }
-            while (st.length() <= 4) {
-                st = st + "0";
-            }
-            System.out.println(st);
-            start = -Integer.parseInt(st);
-            System.out.println(start);
-        }
-        return start;
+        return "GMT" + st;
     }
 }
