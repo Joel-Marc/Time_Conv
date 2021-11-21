@@ -8,9 +8,13 @@
 
 - Apache Spark 3.1.2
 
-
 ## ScreenShots
 
 - ![image](https://user-images.githubusercontent.com/53477893/142756929-ea715ad7-83ae-4ed1-a346-a693e9a20784.png) ![image](https://user-images.githubusercontent.com/53477893/142756945-ed5389bf-04bd-4ba3-8cf7-ee12881c11c6.png)
 - ![image](https://user-images.githubusercontent.com/53477893/142756972-01a9b977-ff82-4f85-a4c1-24571fb814ab.png) ![image](https://user-images.githubusercontent.com/53477893/142756984-4175ca58-f056-4ae8-8219-a625236523e3.png)
- 
+
+## Further Improvements
+
+- To use NER to get the Location and find the appropriate Time Zone.
+- To get input in natural language . (Ex : "When the time in New York is 3 pm, what is the time in London? [or] When the time in London is 9 am, what is the time in Tokyo and India?")
+  
