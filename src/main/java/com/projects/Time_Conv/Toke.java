@@ -14,7 +14,9 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,6 +56,22 @@ public class Toke {
             }
         }
         System.out.println(hmm);
+        LocalDateTime today;
+        if (!tim.contains("00:00")) {
+            tim = tim.replace(":", "");
+            if (!tim.startsWith("0")) {
+                tim = "0" + tim;
+            }
+            System.out.println(tim);
+            while (tim.length() < 4) {
+                tim = tim + "0";
+            }
+            int time = Integer.parseInt(tim);
+            today = LocalDateTime.of(LocalDate.now(), LocalTime.of((int) time / 100, time % 100, 00));
+        } else {
+            today = LocalDateTime.now();
+        }
+
         // HttpClient client = HttpClient.newHttpClient();
         // HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
         // HttpResponse<String> httpResponse = client.send(request,
@@ -63,7 +81,7 @@ public class Toke {
         ZoneId toTimeZone = ZoneId.of(extracted(hmm.get(1))); // Target timezone
         // System.out.println(ZoneId.getAvailableZoneIds() + " " +
         // TimeZone.getTimeZone("PST"));
-        LocalDateTime today = LocalDateTime.now(); // Current time
+        // LocalDateTime today = LocalDateTime.now(); // Current time
 
         // Zoned date time at source timezone
         ZonedDateTime currentISTime = today.atZone(fromTimeZone);
