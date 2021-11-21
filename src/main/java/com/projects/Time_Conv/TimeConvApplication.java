@@ -8,7 +8,7 @@ public class TimeConvApplication {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(TimeConvApplication.class, args);
-		Toke.testToke("07:30 am IST to PST");
+
 		// Toke.testToke("PST of 7 am IST");
 
 	}

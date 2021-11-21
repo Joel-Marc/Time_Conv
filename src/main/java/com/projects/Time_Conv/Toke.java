@@ -19,7 +19,7 @@ public class Toke {
     // private static String url =
     // "https://gist.githubusercontent.com/valo/c07f8db33d223f57a4cc9c670e1b6050/raw/2f47e8d567aafcaab9ed9cf1b90e21db09a57532/timezones.csv";
 
-    public static void testToke(String text) throws IOException, InterruptedException {
+    public static String testToke(String text) throws IOException, InterruptedException {
         // set up pipeline properties
         Properties props = new Properties();
         // set the list of annotators to run
@@ -39,7 +39,7 @@ public class Toke {
         for (CoreLabel tok : doc.tokens()) {
             System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
                     tok.word(), tok.tag()));
-            if (tok.tag().contains("NNP")) {
+            if (tok.tag().contains("NNP") || tok.tag().contains("NN")) {
                 hmm.add(tok.word());
             }
             if (tok.tag().contains("CD")) {
@@ -64,7 +64,7 @@ public class Toke {
         if (time + (end - start) < 0) {
             System.out.println(adsub(time, adsub(start, end)));
         }
-
+        return Integer.toString(time);
     }
 
     private static int adsub(int start, int end) {
