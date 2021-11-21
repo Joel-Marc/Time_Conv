@@ -68,7 +68,7 @@ public class Toke {
         LocalDateTime today;
         if (!tim.contains("00:00")) {
             tim = tim.replace(":", "");
-            if (!tim.startsWith("0") && tim.length() == 1) {
+            if (!tim.startsWith("0") && tim.length() == 1 || tim.length() == 3) {
                 tim = "0" + tim;
             }
             System.out.println(tim);
