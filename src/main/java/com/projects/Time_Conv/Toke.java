@@ -24,9 +24,6 @@ import java.time.format.DateTimeFormatter;
 public class Toke {
     private static final String DATE_FORMAT = "dd-M-yyyy hh:mm:ss a z";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    // public static String text = "Marie was born in Paris.";
-    // private static String url =
-    // "https://gist.githubusercontent.com/valo/c07f8db33d223f57a4cc9c670e1b6050/raw/2f47e8d567aafcaab9ed9cf1b90e21db09a57532/timezones.csv";
 
     public static String testToke(String text) throws IOException, InterruptedException {
         // set up pipeline properties
@@ -43,12 +40,12 @@ public class Toke {
         // annotate
         pipeline.annotate(doc);
         List<String> hmm = new ArrayList<String>();
-        String tim = new String("00:00");
+        String tim = "00:00";
         int flag = 0;
         // display tokens
         for (CoreLabel tok : doc.tokens()) {
-            System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
-                    tok.word(), tok.tag()));
+            // System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(),
+            // tok.beginPosition(), tok.endPosition(),tok.word(), tok.tag()));
             if (tok.tag().contains("NNP") || tok.tag().contains("NN")) {
                 if ("am".contains(tok.word().toLowerCase()) || "pm".contains(tok.word().toLowerCase())) {
                     if ("am".contains(tok.word().toLowerCase())) {
@@ -64,18 +61,18 @@ public class Toke {
                 tim = tok.word();
             }
         }
-        System.out.println(hmm);
+        // System.out.println(hmm);
         LocalDateTime today;
         if (!tim.contains("00:00")) {
             tim = tim.replace(":", "");
             if (!tim.startsWith("0") && tim.length() == 1 || tim.length() == 3) {
                 tim = "0" + tim;
             }
-            System.out.println(tim);
+            // System.out.println(tim);
             while (tim.length() < 4) {
                 tim = tim + "0";
             }
-            System.out.println(tim);
+            // System.out.println(tim);
 
             int time = Integer.parseInt(tim);
             if (flag == 2) {
@@ -104,8 +101,8 @@ public class Toke {
         ZonedDateTime currentETime = currentISTime.withZoneSameInstant(toTimeZone);
 
         // Format date time - optional
-        System.out.println(formatter.format(currentISTime));
-        System.out.println(formatter.format(currentETime));
+        // System.out.println(formatter.format(currentISTime));
+        // System.out.println(formatter.format(currentETime));
 
         return "\nCurrent Time : " + formatter.format(currentISTime) + "\nDilated Time : "
                 + formatter.format(currentETime);
@@ -125,10 +122,10 @@ public class Toke {
 
         sqlResult.show(); // for testing
         List<String> listOne = sqlResult.as(Encoders.STRING()).collectAsList();
-        System.out.println(listOne);
-        System.out.println(sqlResult);
+        // System.out.println(listOne);
+        // System.out.println(sqlResult);
 
-        String st = new String(listOne.get(0));
+        String st = listOne.get(0);
 
         return "GMT" + st;
     }

@@ -17,10 +17,8 @@ public class controller {
 
 	@RequestMapping(value = "/Savesearch", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute search Search) throws IOException, InterruptedException {
-		System.out.println(Search + " " + Search.getSearch());
 		ModelAndView modelAndView = new ModelAndView();
 		Search.setSearch(Toke.testToke(Search.getSearch()));
-		// Toke.testToke("07:30 am IST to PST");
 		modelAndView.setViewName("Savesearch");
 		modelAndView.addObject("search", Search);
 		return modelAndView;
