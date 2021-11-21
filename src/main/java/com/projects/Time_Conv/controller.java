@@ -15,7 +15,7 @@ public class controller {
 
 	@RequestMapping(value = "Savesearch", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute search Search) {
-		System.out.println(Search);
+		System.out.println(Search + " " + Search.getSearch());
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Savesearch");
 		modelAndView.addObject("search", Search);
