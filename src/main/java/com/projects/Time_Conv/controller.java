@@ -13,7 +13,7 @@ public class controller {
 		return "index";
 	}
 
-	@RequestMapping(value = "Savesearch", method = RequestMethod.POST)
+	@RequestMapping(value = "/Savesearch", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute search Search) {
 		System.out.println(Search + " " + Search.getSearch());
 		ModelAndView modelAndView = new ModelAndView();

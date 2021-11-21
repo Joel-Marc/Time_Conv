@@ -4,6 +4,10 @@ public class search {
 
 	private String search_val;
 
+	public search() {
+		this.search_val = "LMAOOOOOO";
+	}
+
 	public search(String search) {
 		this.search_val = search;
 	}
