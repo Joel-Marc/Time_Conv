@@ -19,6 +19,6 @@
 
 ## Further Improvements
 
-- To use NER to get the Location and find the appropriate Time Zone.
+- To use NER to get the location and find the appropriate Time Zone.
 - To get input in natural language . (Ex : "When the time in New York is 3 pm, what is the time in London? [or] When the time in London is 9 am, what is the time in Tokyo and India?")
   
