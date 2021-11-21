@@ -10,8 +10,12 @@
 
 ## ScreenShots
 
-- ![image](https://user-images.githubusercontent.com/53477893/142756929-ea715ad7-83ae-4ed1-a346-a693e9a20784.png) ![image](https://user-images.githubusercontent.com/53477893/142756945-ed5389bf-04bd-4ba3-8cf7-ee12881c11c6.png)
-- ![image](https://user-images.githubusercontent.com/53477893/142756972-01a9b977-ff82-4f85-a4c1-24571fb814ab.png) ![image](https://user-images.githubusercontent.com/53477893/142756984-4175ca58-f056-4ae8-8219-a625236523e3.png)
+- ![image](https://user-images.githubusercontent.com/53477893/142756929-ea715ad7-83ae-4ed1-a346-a693e9a20784.png) ![image](https://user-images.githubusercontent.com/53477893/142759092-ce35ec17-2c26-411f-819e-afc72173f76c.png)
+
+- ![image](https://user-images.githubusercontent.com/53477893/142756972-01a9b977-ff82-4f85-a4c1-24571fb814ab.png) ![image](https://user-images.githubusercontent.com/53477893/142759110-6a85abdf-830b-4ec0-ba6f-fa7935efae45.png)
+- ![image](https://user-images.githubusercontent.com/53477893/142759145-bb2fb4dc-7263-4e32-a0b4-46b6b947f88b.png) ![image](https://user-images.githubusercontent.com/53477893/142759132-0ecc6ef6-7e75-4c30-8684-9a1f0ce56854.png)
+
+
 
 ## Further Improvements
 
