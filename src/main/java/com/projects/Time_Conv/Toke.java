@@ -44,8 +44,8 @@ public class Toke {
         int flag = 0;
         // display tokens
         for (CoreLabel tok : doc.tokens()) {
-            // System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(),
-            // tok.beginPosition(), tok.endPosition(),tok.word(), tok.tag()));
+            System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
+                    tok.word(), tok.tag()));
             if (tok.tag().contains("NNP") || tok.tag().contains("NN")) {
                 if ("am".contains(tok.word().toLowerCase()) || "pm".contains(tok.word().toLowerCase())) {
                     if ("am".contains(tok.word().toLowerCase())) {
@@ -61,7 +61,7 @@ public class Toke {
                 tim = tok.word();
             }
         }
-        // System.out.println(hmm);
+        System.out.println(hmm);
         LocalDateTime today;
         if (!tim.contains("00:00")) {
             tim = tim.replace(":", "");
@@ -86,13 +86,8 @@ public class Toke {
             today = LocalDateTime.now();
         }
 
-        // HttpClient client = HttpClient.newHttpClient();
-        // HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-        // HttpResponse<String> httpResponse = client.send(request,
-        // HttpResponse.BodyHandlers.ofString());
-        // System.out.println(httpResponse.body());
-        ZoneId fromTimeZone = ZoneId.of(extracted(hmm.get(0))); // Source timezone
-        ZoneId toTimeZone = ZoneId.of(extracted(hmm.get(1))); // Target timezone
+        ZoneId fromTimeZone = ZoneId.of(extrac.extracted(hmm.get(0))); // Source timezone
+        ZoneId toTimeZone = ZoneId.of(extrac.extracted(hmm.get(1))); // Target timezone
 
         // Zoned date time at source timezone
         ZonedDateTime currentISTime = today.atZone(fromTimeZone);
@@ -101,32 +96,11 @@ public class Toke {
         ZonedDateTime currentETime = currentISTime.withZoneSameInstant(toTimeZone);
 
         // Format date time - optional
-        // System.out.println(formatter.format(currentISTime));
-        // System.out.println(formatter.format(currentETime));
+        System.out.println(formatter.format(currentISTime));
+        System.out.println(formatter.format(currentETime));
 
         return "\nCurrent Time : " + formatter.format(currentISTime) + "\nDilated Time : "
                 + formatter.format(currentETime);
     }
 
-    private static String extracted(String test) {
-        SparkSession spark = SparkSession.builder().appName("time_zone_conv").config("spark.master", "local")
-                .getOrCreate();
-
-        StructType schema = new StructType().add("Abr", "string").add("Zone", "string").add("Dilate", "string");
-
-        Dataset<Row> df = spark.read().option("mode", "DROPMALFORMED").schema(schema)
-                .csv("/home/jmarc/Desktop/Time_Conv/src/main/java/com/projects/Time_Conv/timezones.csv");
-        df.createOrReplaceTempView("time_zone");
-        // String test = new String("AMST");
-        Dataset<Row> sqlResult = spark.sql("SELECT Dilate" + " FROM time_zone where Abr = '" + test + "' LIMIT 1");
-
-        sqlResult.show(); // for testing
-        List<String> listOne = sqlResult.as(Encoders.STRING()).collectAsList();
-        // System.out.println(listOne);
-        // System.out.println(sqlResult);
-
-        String st = listOne.get(0);
-
-        return "GMT" + st;
-    }
 }
