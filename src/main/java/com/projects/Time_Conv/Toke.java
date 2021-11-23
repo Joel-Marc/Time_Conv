@@ -55,7 +55,7 @@ public class Toke {
                     }
                     continue;
                 }
-                hmm.add(tok.word());
+                hmm.add(tok.word().toUpperCase());
             }
             if (tok.tag().contains("CD")) {
                 tim = tok.word();
