@@ -44,8 +44,9 @@ public class Toke {
         int flag = 0;
         // display tokens
         for (CoreLabel tok : doc.tokens()) {
-            System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(), tok.beginPosition(), tok.endPosition(),
-                    tok.word(), tok.tag()));
+            // System.out.println(String.format("%s\t%d\t%d\t%s\t%s", tok.word(),
+            // tok.beginPosition(), tok.endPosition(),
+            // tok.word(), tok.tag()));
             if (tok.tag().contains("NNP") || tok.tag().contains("NN")) {
                 if ("am".contains(tok.word().toLowerCase()) || "pm".contains(tok.word().toLowerCase())) {
                     if ("am".contains(tok.word().toLowerCase())) {
@@ -61,7 +62,7 @@ public class Toke {
                 tim = tok.word();
             }
         }
-        System.out.println(hmm);
+        // System.out.println(hmm);
         LocalDateTime today;
         if (!tim.contains("00:00")) {
             tim = tim.replace(":", "");
@@ -96,8 +97,8 @@ public class Toke {
         ZonedDateTime currentETime = currentISTime.withZoneSameInstant(toTimeZone);
 
         // Format date time - optional
-        System.out.println(formatter.format(currentISTime));
-        System.out.println(formatter.format(currentETime));
+        // System.out.println(formatter.format(currentISTime));
+        // System.out.println(formatter.format(currentETime));
 
         return "\nCurrent Time : " + formatter.format(currentISTime) + "\nDilated Time : "
                 + formatter.format(currentETime);

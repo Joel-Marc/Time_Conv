@@ -29,8 +29,8 @@ public class extrac {
 
         sqlResult.show(); // for testing
         List<String> listOne = sqlResult.as(Encoders.STRING()).collectAsList();
-        System.out.println(listOne);
-        System.out.println(sqlResult);
+        // System.out.println(listOne);
+        // System.out.println(sqlResult);
 
         String st = listOne.get(0);
 
