@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.projects.Time_Conv
+web: java $JAVA_OPTS -cp target/classes/:target/dependency/* com.projects.Time_Conv.TimeConvApplication
