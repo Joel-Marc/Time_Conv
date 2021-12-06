@@ -1,1 +1,1 @@
-web: java -jar target/Time_Conv-0.0.1-SNAPSHOT.jar
+web: java -jar target/my-app-1.0.jar
