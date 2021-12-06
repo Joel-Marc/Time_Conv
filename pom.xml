@@ -132,13 +132,13 @@
 					<jdkVersion>1.8</jdkVersion>
 					<!-- Use your own application name -->
 					<appName>timezone36912</appName>
-					<includeTarget>false</includeTarget>
+					<!-- <includeTarget>false</includeTarget>
 					<includes>
 						<include>target/my-app-1.0.jar</include>
 					</includes>
 					<processTypes>
 						<web>java -jar target/my-app-1.0.jar</web>
-					</processTypes>
+					</processTypes> -->
 				</configuration>
 			</plugin>
 			<plugin>
