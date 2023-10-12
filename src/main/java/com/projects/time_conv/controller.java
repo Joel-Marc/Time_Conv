@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Controll {
-	@RequestMapping("/")
+	@RequestMapping("/", method = RequestMethod.GET)
 	public String index() {
 		return "index";
 	}
 
-	@RequestMapping(value = "/Savesearch", method = RequestMethod.POST)
+	@PostMapping(value = "/Savesearch")
 	public ModelAndView save(@ModelAttribute search sear) throws IOException, InterruptedException {
 		ModelAndView modelAndView = new ModelAndView();
 		sear.setSearch(Toke.testToke(sear.getSearch()));

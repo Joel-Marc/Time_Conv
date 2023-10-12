@@ -26,7 +26,7 @@ public class Toke {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     private Toke() {
-        System.out.println("In private constructor");
+        logger.log("In private constructor");
     }
 
     public static String testToke(String text) throws IOException, InterruptedException {
