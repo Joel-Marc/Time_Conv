@@ -1,28 +1,28 @@
-package com.projects.Time_Conv;
+package com.projects.time_conv;
 
-public class search {
+public class Search {
 
-	private String search_val;
+	private String searchVal;
 
 	public search() {
-		this.search_val = "LMAOOOOOO";
+		this.searchVal = "LMAOOOOOO";
 	}
 
 	public search(String search) {
-		this.search_val = search;
+		this.searchVal = search;
 	}
 
 	public String getSearch() {
-		return search_val;
+		return searchVal;
 	}
 
 	public void setSearch(String search) {
-		this.search_val = search;
+		this.searchVal = search;
 	}
 
 	@Override
 	public String toString() {
-		return "search [search_val=" + search_val + "]";
+		return "search [searchVal=" + searchVal + "]";
 	}
 
 }

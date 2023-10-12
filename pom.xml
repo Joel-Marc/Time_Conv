@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.projects</groupId>
-	<artifactId>Time_Conv</artifactId>
+	<artifactId>time_conv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Time_Conv</name>
+	<name>time_conv</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

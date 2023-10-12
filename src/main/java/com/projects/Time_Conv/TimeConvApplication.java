@@ -1,4 +1,4 @@
-package com.projects.Time_Conv;
+package com.projects.time_conv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
